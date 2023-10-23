@@ -23,7 +23,7 @@ const HeroStyled = styled.div`
   background-position: 0 -300px;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 400px;
+  height: 50vh;
 
   .sr-only {
     border: 0 !important;
