@@ -13,6 +13,4 @@ export default function Homepage() {
   );
 }
 
-const HomepageStyled = styled.main`
-  border: 3px solid blue;
-`;
+const HomepageStyled = styled.main``;
