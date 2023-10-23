@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-export default function FeatureItem({
-  icon,
-  title = "Feature title",
-  content = "Feature content",
-}) {
+export default function FeatureItem({ icon, title, content }) {
   return (
     <FeatureItemStyled>
       <img src={icon} className="feature__icon" alt="feature-icon" />
