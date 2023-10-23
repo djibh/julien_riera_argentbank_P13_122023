@@ -6,6 +6,7 @@ export default function Footer() {
 
 const FooterStyled = styled.footer`
   padding-block: 2em;
+  border-top: 2px solid rgb(204, 204, 204);
   text-align: center;
   color: #888;
 `;
