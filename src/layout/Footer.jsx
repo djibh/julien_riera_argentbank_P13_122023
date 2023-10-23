@@ -5,8 +5,9 @@ export default function Footer() {
 }
 
 const FooterStyled = styled.footer`
-  padding-block: 2em;
-  border-top: 2px solid rgb(204, 204, 204);
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0 1.5rem;
+  border-top: 2px solid #ccc;
   color: #888;
 `;

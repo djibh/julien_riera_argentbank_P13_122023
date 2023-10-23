@@ -23,7 +23,7 @@ const HeroStyled = styled.div`
   background-position: 0 -300px;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 50vh;
+  height: 400px;
 
   .sr-only {
     border: 0 !important;
@@ -42,21 +42,21 @@ const HeroStyled = styled.div`
   .hero-content {
     position: absolute;
     right: 5em;
-    width: 200px;
+    width: 300px;
     background: white;
     padding: 2rem;
     text-align: left;
-    margin: 0 auto;
+    margin: 2rem;
 
     & .subtitle {
       font-weight: bold;
-      font-size: 1rem;
       margin: 0;
+      font-size: 1.5rem;
     }
 
     & .text {
       margin-bottom: 0;
-      font-size: 0.9rem;
+      font-size: 1.2rem;
     }
   }
 `;

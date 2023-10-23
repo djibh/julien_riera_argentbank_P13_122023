@@ -8,15 +8,16 @@ export default function FeatureItem({
   return (
     <FeatureItemStyled>
       <img src={icon} className="feature__icon" alt="feature-icon" />
-      <h3>{title}</h3>
-      <span>{content}</span>
+      <h3 className="title">{title}</h3>
+      <span className="content">{content}</span>
     </FeatureItemStyled>
   );
 }
 
 const FeatureItemStyled = styled.article`
+  flex: 1;
+  padding: 2.5rem;
   text-align: center;
-  max-width: 30%;
 
   .feature__icon {
     display: grid;
@@ -29,7 +30,13 @@ const FeatureItemStyled = styled.article`
     border-radius: 50%;
   }
 
-  h3 {
+  .title {
     margin-block: 1.5em;
+    margin-bottom: 0.5rem;
+    color: #222;
+    font-size: 1.25rem;
+  }
+
+  .content {
   }
 `;
