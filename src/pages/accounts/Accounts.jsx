@@ -2,10 +2,40 @@ import styled from "styled-components";
 import { theme } from "../../theme";
 import Button from "../../components/Button";
 import Account from "./Account";
+import Loader from "../../components/Loader";
 
 export default function Accounts() {
+  const isLoading = false;
+
+  isLoading && <Loader />;
+
+  const mock = [
+    {
+      id: 1,
+      accountType: "Argent Bank Checking",
+      accountNumber: "x8349",
+      accountBalance: "2082.79",
+      accountInfo: "Available Balance",
+    },
+    {
+      id: 2,
+      accountType: "Argent Bank Savings",
+      accountNumber: "x67124",
+      accountBalance: "10,928.42",
+      accountInfo: "Available Balance",
+    },
+    {
+      id: 3,
+      accountType: "Argent Bank Credit Card",
+      accountNumber: "x5201",
+      accountBalance: "184.30",
+      accountInfo: "Current Balance",
+    },
+  ];
+
   return (
     <AccountsStyled>
+      <Loader />
       <header>
         <h1>
           Welcome back
@@ -14,9 +44,22 @@ export default function Accounts() {
         <Button content="Edit name" />
       </header>
       <div>
+        {mock.map(
+          ({ id, accountType, accountNumber, accountBalance, accountInfo }) => {
+            return (
+              <Account
+                key={id}
+                number={accountNumber}
+                title={accountType}
+                balance={accountBalance}
+                description={accountInfo}
+              />
+            );
+          }
+        )}
+        {/* <Account />
         <Account />
-        <Account />
-        <Account />
+        <Account /> */}
       </div>
     </AccountsStyled>
   );
@@ -26,6 +69,12 @@ const AccountsStyled = styled.main`
   text-align: center;
   padding: ${theme.spacing.xl};
   background-color: ${theme.colors.backgroundDark};
+  min-height: 80vh;
+
+  > :first-child {
+    display: flex;
+    justify-content: center;
+  }
 
   header {
     color: ${theme.colors.white};

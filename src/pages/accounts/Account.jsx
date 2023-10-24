@@ -1,18 +1,26 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
 import Button from "../../components/Button";
+import { useLocation } from "react-router-dom";
 
-export default function Account() {
+export default function Account({ title, number, balance, description }) {
+  const location = useLocation();
+  const isCurrentPathAccounts = location.pathname === "/accounts";
+
   return (
     <AccountStyled>
       <div>
-        <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-        <p className="account-amount">$2,082.79</p>
-        <p className="account-amount-description">Available balance</p>
+        <h3 className="account-title">
+          {title} ({number})
+        </h3>
+        <p className="account-amount">${balance}</p>
+        <p className="account-amount-description">{description}</p>
       </div>
-      <div>
-        <Button content="View transactions" />
-      </div>
+      {isCurrentPathAccounts && (
+        <div>
+          <Button content="View transactions" />
+        </div>
+      )}
     </AccountStyled>
   );
 }
