@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
 import Button from "../../components/Button";
+import Account from "./Account";
 
 export default function Accounts() {
   return (
@@ -13,36 +14,9 @@ export default function Accounts() {
         <Button content="Edit name" />
       </header>
       <div>
-        <section className="account">
-          <div>
-            <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-            <p className="account-amount">$2,082.79</p>
-            <p className="account-amount-description">Available balance</p>
-          </div>
-          <div>
-            <Button content="View transactions" />
-          </div>
-        </section>
-        <section className="account">
-          <div>
-            <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-            <p className="account-amount">$2,082.79</p>
-            <p className="account-amount-description">Available balance</p>
-          </div>
-          <div>
-            <Button content="View transactions" />
-          </div>
-        </section>
-        <section className="account">
-          <div>
-            <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-            <p className="account-amount">$2,082.79</p>
-            <p className="account-amount-description">Available balance</p>
-          </div>
-          <div>
-            <Button content="View transactions" />
-          </div>
-        </section>
+        <Account />
+        <Account />
+        <Account />
       </div>
     </AccountsStyled>
   );
@@ -65,37 +39,6 @@ const AccountsStyled = styled.main`
       margin-inline-start: 0px;
       margin-inline-end: 0px;
       font-weight: bold;
-    }
-  }
-
-  .account {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: ${theme.spacing.xl};
-    border: 1px solid black;
-    background-color: ${theme.colors.white};
-    padding: ${theme.spacing.lg};
-    text-align: left;
-
-    &-title {
-      margin: 0;
-      padding: 0;
-      font-size: ${theme.fonts.size.S0};
-      font-weight: ${theme.fonts.weight.regular};
-    }
-
-    &-amount {
-      margin: 0;
-      font-size: 2.5rem;
-      font-weight: ${theme.fonts.weight.bold};
-
-      &-description {
-        margin: 0;
-      }
     }
   }
 `;
