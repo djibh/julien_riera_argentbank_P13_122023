@@ -30,14 +30,14 @@ const AccountStyled = styled.section`
   padding: ${theme.spacing.lg};
   text-align: left;
 
-  &-title {
+  .account-title {
     margin: 0;
     padding: 0;
     font-size: ${theme.fonts.size.S0};
     font-weight: ${theme.fonts.weight.regular};
   }
 
-  &-amount {
+  .account-amount {
     margin: 0;
     font-size: 2.5rem;
     font-weight: ${theme.fonts.weight.bold};
