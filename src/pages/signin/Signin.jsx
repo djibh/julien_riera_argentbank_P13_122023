@@ -90,5 +90,6 @@ const SigninStyled = styled.main`
 
   .sign-in__button {
     width: 100%;
+    margin-top: ${theme.spacing.md};
   }
 `;
