@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../theme";
 
 export default function FeatureItem({ icon, title, content }) {
   return (
@@ -12,27 +13,24 @@ export default function FeatureItem({ icon, title, content }) {
 
 const FeatureItemStyled = styled.article`
   flex: 1;
-  padding: 2.5rem;
+  padding: ${theme.spacing.xl};
   text-align: center;
 
   .feature__icon {
     display: grid;
     margin: auto;
     place-items: center;
-    padding: 1rem;
+    padding: ${theme.spacing.md};
     max-width: 100px;
     aspect-ratio: 1;
-    border: 10px solid #00bc77;
-    border-radius: 50%;
+    border: 10px solid ${theme.colors.primary};
+    border-radius: ${theme.borderRadius.circle};
   }
 
   .title {
-    margin-block: 1.5em;
-    margin-bottom: 0.5rem;
+    margin-block: ${theme.spacing.lg};
+    margin-bottom: ${theme.spacing.xs};
     color: #222;
-    font-size: 1.25rem;
-  }
-
-  .content {
+    font-size: ${theme.fonts.size.S2};
   }
 `;

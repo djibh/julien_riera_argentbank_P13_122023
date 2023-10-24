@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import background from "../../assets/img/bank-tree.jpeg";
+import { theme } from "../../theme";
 
 export default function Hero() {
   return (
@@ -43,20 +44,20 @@ const HeroStyled = styled.div`
     position: absolute;
     right: 5em;
     width: 300px;
-    background: white;
-    padding: 2rem;
+    background: ${theme.colors.white};
+    padding: ${theme.spacing.xl};
     text-align: left;
-    margin: 2rem;
+    margin: ${theme.spacing.xl};
 
     & .subtitle {
-      font-weight: bold;
+      font-weight: ${theme.fonts.weight.bold};
       margin: 0;
-      font-size: 1.5rem;
+      font-size: ${theme.fonts.size.S3};
     }
 
     & .text {
       margin-bottom: 0;
-      font-size: 1.2rem;
+      font-size: ${theme.fonts.size.S1};
     }
   }
 `;

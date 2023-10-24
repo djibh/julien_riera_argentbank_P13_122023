@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import FeatureItem from "../../components/FeatureItem";
 import { features } from "../../data/featuresList";
+import { theme } from "../../theme";
 
 export default function Features() {
   return (
@@ -17,5 +18,5 @@ export default function Features() {
 const FeaturesStyled = styled.section`
   display: flex;
   justify-content: space-evenly;
-  padding: 3em 2em;
+  padding: ${theme.spacing.xl};
 `;

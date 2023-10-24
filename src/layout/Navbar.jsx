@@ -3,6 +3,7 @@ import { FaUserCircle } from "react-icons/fa";
 import logo from "../assets/img/logo.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { theme } from "../theme";
 
 export default function Navbar() {
   const [isConnected, setIsConnected] = useState(true);
@@ -26,7 +27,7 @@ export default function Navbar() {
 }
 
 const NavbarStyled = styled.header`
-  padding: 0em 2em;
+  padding: 0em ${theme.spacing.xl};
 
   nav {
     display: flex;
@@ -38,9 +39,10 @@ const NavbarStyled = styled.header`
     }
 
     a {
+      display: grid;
       text-decoration: none;
-      font-weight: bold;
-      color: #2c3e50;
+      font-weight: ${theme.fonts.weight.bold};
+      color: ${theme.colors.primaryFontColor};
 
       &:hover {
         text-decoration: underline;
@@ -50,7 +52,7 @@ const NavbarStyled = styled.header`
     & .sign-in__nav-item {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: ${theme.spacing.xs};
     }
   }
 `;

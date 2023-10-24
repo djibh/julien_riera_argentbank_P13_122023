@@ -1,5 +1,6 @@
 import { FaUserCircle } from "react-icons/fa";
 import styled from "styled-components";
+import { theme } from "../../theme";
 
 export default function Signin() {
   return (
@@ -10,11 +11,11 @@ export default function Signin() {
         <form className="signin__form">
           <div className="input-comp">
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="Entrez votre email" />
+            <input type="email" id="email" />
           </div>
           <div className="input-comp">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" placeholder="Mot de passe" />
+            <input type="password" id="password" />
           </div>
           <div className="input-remember">
             <input type="checkbox" id="remember-me" />
@@ -30,44 +31,62 @@ export default function Signin() {
 const SigninStyled = styled.main`
   display: grid;
   place-items: center;
-  background-color: #12002b;
+  background-color: ${theme.colors.backgroundDark};
   padding-block: 3em;
-  color: #2c3e50;
 
   .wrapper {
     box-sizing: border-box;
     background-color: white;
     width: 300px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: ${theme.spacing.xl};
     text-align: center;
 
     & .form__icon {
-      font-size: 2rem;
+      font-size: 5rem;
     }
   }
 
   h1 {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: ${theme.fonts.size.S3};
   }
 
   .input-comp {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1em;
+    margin-bottom: ${theme.spacing.md};
     text-align: start;
-    font-weight: bold;
+    font-weight: ${theme.fonts.weight.bold};
+
+    & input {
+      padding: ${theme.spacing.xs};
+      font-size: ${theme.fonts.size.S1};
+
+      &:focus {
+        outline: none;
+        border: 2px solid ${theme.colors.primary};
+        border-radius: ${theme.borderRadius.subtle};
+      }
+    }
+  }
+
+  .input-remember {
+    display: flex;
+
+    & label {
+      margin-left: ${theme.spacing.xxs};
+    }
   }
 
   button {
     width: 100%;
-    padding: 8px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-top: 1rem;
-    border-color: #00bc77;
-    background-color: #00bc77;
-    color: #fff;
+    padding: ${theme.spacing.xs};
+    font-size: ${theme.fonts.size.S1};
+    font-weight: ${theme.fonts.weight.bold};
+    margin-top: ${theme.spacing.md};
+    border-color: ${theme.colors.primary};
+    background-color: ${theme.colors.primary};
+    color: ${theme.colors.white};
   }
 `;
