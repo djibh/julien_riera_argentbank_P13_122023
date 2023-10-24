@@ -1,14 +1,23 @@
 import { FaUserCircle } from "react-icons/fa";
 import styled from "styled-components";
 import { theme } from "../../theme";
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button";
 
 export default function Signin() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    navigate("/accounts");
+  };
+
   return (
     <SigninStyled>
       <section className="wrapper">
         <FaUserCircle className="form__icon" />
         <h1>Sign in</h1>
-        <form className="signin__form">
+        <form onSubmit={handleSubmit} className="signin__form">
           <div className="input-comp">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" />
@@ -21,7 +30,7 @@ export default function Signin() {
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <button>Sign in</button>
+          <Button content={"Sign in"} className={"sign-in__button"} />
         </form>
       </section>
     </SigninStyled>
@@ -79,14 +88,7 @@ const SigninStyled = styled.main`
     }
   }
 
-  button {
+  .sign-in__button {
     width: 100%;
-    padding: ${theme.spacing.xs};
-    font-size: ${theme.fonts.size.S1};
-    font-weight: ${theme.fonts.weight.bold};
-    margin-top: ${theme.spacing.md};
-    border-color: ${theme.colors.primary};
-    background-color: ${theme.colors.primary};
-    color: ${theme.colors.white};
   }
 `;
