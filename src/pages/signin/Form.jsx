@@ -4,7 +4,7 @@ import Input from "../../components/Input";
 import styled from "styled-components";
 import { theme } from "../../theme";
 
-export default function Form() {
+export default function Form({ icon, title }) {
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -14,6 +14,8 @@ export default function Form() {
 
   return (
     <FormStyled onSubmit={handleSubmit} className="signin__form">
+      {icon && icon}
+      {title && <h1>{title}</h1>}
       <Input type={"email"} />
       <Input type={"password"} />
       <Input
@@ -28,6 +30,13 @@ export default function Form() {
 }
 
 const FormStyled = styled.form`
+  box-sizing: border-box;
+  background-color: white;
+  width: 300px;
+  margin: 0 auto;
+  padding: ${theme.spacing.xl};
+  text-align: center;
+
   .input-remember {
     flex-direction: row-reverse;
     justify-content: start;

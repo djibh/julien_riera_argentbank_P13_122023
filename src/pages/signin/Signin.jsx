@@ -6,11 +6,7 @@ import Form from "./Form";
 export default function Signin() {
   return (
     <SigninStyled>
-      <section className="wrapper">
-        <FaUserCircle className="form__icon" />
-        <h1>Sign in</h1>
-        <Form />
-      </section>
+      <Form icon={<FaUserCircle className="form__icon" />} title={"Sign in"} />
     </SigninStyled>
   );
 }
@@ -20,18 +16,10 @@ const SigninStyled = styled.main`
   place-items: center;
   background-color: ${theme.colors.backgroundDark};
   padding-block: 3em;
+  min-height: 75vh;
 
-  .wrapper {
-    box-sizing: border-box;
-    background-color: white;
-    width: 300px;
-    margin: 0 auto;
-    padding: ${theme.spacing.xl};
-    text-align: center;
-
-    & .form__icon {
-      font-size: 5rem;
-    }
+  .form__icon {
+    font-size: 5rem;
   }
 
   h1 {

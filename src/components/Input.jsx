@@ -4,11 +4,9 @@ import capitalize from "../utils/capitalize";
 
 export default function Input({ label, type, id, className }) {
   // if no ID provided, use type value
-  if (!id) {
-    id = type;
-  }
-
-  if (!label) label = capitalize(type);
+  !id && (id = type);
+  // if no label provided, use type value and capitalize first letter
+  !label && (label = capitalize(type));
 
   return (
     <InputStyled className={className}>
