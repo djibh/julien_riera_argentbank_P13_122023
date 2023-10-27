@@ -4,6 +4,7 @@ import Button from "../../components/Button";
 import { useLocation } from "react-router-dom";
 
 export default function Account({ title, number, balance, description }) {
+  // Used to display a button on Accounts page only and not Transactions page
   const location = useLocation();
   const isCurrentPathAccounts = location.pathname === "/accounts";
 

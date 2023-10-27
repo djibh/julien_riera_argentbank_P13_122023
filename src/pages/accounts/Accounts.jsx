@@ -57,9 +57,6 @@ export default function Accounts() {
             );
           }
         )}
-        {/* <Account />
-        <Account />
-        <Account /> */}
       </div>
     </AccountsStyled>
   );
@@ -72,8 +69,9 @@ const AccountsStyled = styled.main`
   min-height: 80vh;
 
   > :first-child {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    /* justify-content: center; */
+    place-items: center;
   }
 
   header {
