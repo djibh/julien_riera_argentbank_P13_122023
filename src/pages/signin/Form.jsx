@@ -1,19 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import styled from "styled-components";
 import { theme } from "../../theme";
 
-export default function Form({ icon, title }) {
-  const navigate = useNavigate();
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    navigate("/accounts");
-  };
-
+export default function Form({ icon, title, handleSubmit }) {
   return (
-    <FormStyled onSubmit={handleSubmit} className="signin__form">
+    <FormStyled onSubmit={handleSubmit} className="signin__form" method="POST">
       {icon && icon}
       {title && <h1>{title}</h1>}
       <Input type={"email"} />

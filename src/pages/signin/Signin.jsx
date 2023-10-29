@@ -2,11 +2,23 @@ import { FaUserCircle } from "react-icons/fa";
 import styled from "styled-components";
 import { theme } from "../../theme";
 import Form from "./Form";
+import { useNavigate } from "react-router-dom";
 
 export default function Signin() {
+  const navigate = useNavigate();
+
+  const postUserData = (event) => {
+    event.preventDefault();
+    navigate("/accounts");
+  };
+
   return (
     <SigninStyled>
-      <Form icon={<FaUserCircle className="form__icon" />} title={"Sign in"} />
+      <Form
+        handleSubmit={postUserData}
+        icon={<FaUserCircle className="form__icon" />}
+        title={"Sign in"}
+      />
     </SigninStyled>
   );
 }
