@@ -3,22 +3,20 @@ import styled from "styled-components";
 import { theme } from "../../theme";
 import Form from "./Form";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default function Signin() {
   const navigate = useNavigate();
+  const { success } = useSelector((state) => state.auth);
 
-  const postUserData = (event) => {
-    event.preventDefault();
-    navigate("/accounts");
-  };
+  useEffect(() => {
+    if (success) return navigate("/accounts");
+  }, [navigate, success]);
 
   return (
     <SigninStyled>
-      <Form
-        handleSubmit={postUserData}
-        icon={<FaUserCircle className="form__icon" />}
-        title={"Sign in"}
-      />
+      <Form icon={<FaUserCircle className="form__icon" />} title={"Sign in"} />
     </SigninStyled>
   );
 }

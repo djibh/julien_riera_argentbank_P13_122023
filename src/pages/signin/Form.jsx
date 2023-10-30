@@ -2,14 +2,38 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import styled from "styled-components";
 import { theme } from "../../theme";
+import { userLogin } from "../../utils/authSlice";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
-export default function Form({ icon, title, handleSubmit }) {
+export default function Form({ icon, title }) {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const postLoginCredentials = (event) => {
+    event.preventDefault();
+    dispatch(userLogin({ email, password }));
+  };
+
   return (
-    <FormStyled onSubmit={handleSubmit} className="signin__form" method="POST">
+    <FormStyled
+      onSubmit={postLoginCredentials}
+      className="signin__form"
+      method="POST"
+    >
       {icon && icon}
       {title && <h1>{title}</h1>}
-      <Input type={"email"} />
-      <Input type={"password"} />
+      <Input
+        type={"email"}
+        handleChange={(email) => setEmail(email)}
+        required
+      />
+      <Input
+        type={"password"}
+        handleChange={(password) => setPassword(password)}
+        required
+      />
       <Input
         label={"Remember me"}
         type={"checkbox"}
