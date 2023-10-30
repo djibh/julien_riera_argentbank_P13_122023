@@ -3,10 +3,15 @@ import { theme } from "../../theme";
 import Button from "../../components/Button";
 import Account from "./Account";
 import Loader from "../../components/Loader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Accounts() {
+  const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
   const [isLoading, setisLoading] = useState(true);
+
   setTimeout(() => {
     setisLoading(false);
   }, 1000);
@@ -34,6 +39,12 @@ export default function Accounts() {
       accountInfo: "Current Balance",
     },
   ];
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/signin");
+    }
+  }, [token, navigate]);
 
   return (
     <AccountsStyled>

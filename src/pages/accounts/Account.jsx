@@ -31,7 +31,8 @@ const AccountStyled = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 95%;
+  max-width: 900px;
   margin: 0 auto;
   margin-bottom: ${theme.spacing.xl};
   border: 1px solid black;

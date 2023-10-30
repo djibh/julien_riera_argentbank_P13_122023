@@ -1,12 +1,22 @@
 import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
+import { PiSignOutBold } from "react-icons/pi";
 import logo from "../assets/img/logo.png";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { theme } from "../theme";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../utils/authSlice";
 
 export default function Navbar() {
-  const [isConnected, setIsConnected] = useState(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
+
+  const signOut = () => {
+    dispatch(logout());
+    navigate("/");
+    window.location.reload();
+  };
 
   return (
     <NavbarStyled>
@@ -15,7 +25,12 @@ export default function Navbar() {
           <img src={logo} alt="logo" />
         </Link>
 
-        {isConnected && (
+        {token ? (
+          <Link onClick={signOut} className="sign-in__nav-item">
+            <PiSignOutBold />
+            Sign out
+          </Link>
+        ) : (
           <Link to="/signin" className="sign-in__nav-item">
             <FaUserCircle />
             Sign in
