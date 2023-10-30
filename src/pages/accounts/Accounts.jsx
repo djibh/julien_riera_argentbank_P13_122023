@@ -3,11 +3,13 @@ import { theme } from "../../theme";
 import Button from "../../components/Button";
 import Account from "./Account";
 import Loader from "../../components/Loader";
+import { useState } from "react";
 
 export default function Accounts() {
-  const isLoading = false;
-
-  isLoading && <Loader />;
+  const [isLoading, setisLoading] = useState(true);
+  setTimeout(() => {
+    setisLoading(false);
+  }, 1000);
 
   const mock = [
     {
@@ -35,29 +37,40 @@ export default function Accounts() {
 
   return (
     <AccountsStyled>
-      <Loader />
-      <header>
-        <h1>
-          Welcome back
-          <br /> Tony Jarvis{" "}
-        </h1>
-        <Button content="Edit name" />
-      </header>
-      <div>
-        {mock.map(
-          ({ id, accountType, accountNumber, accountBalance, accountInfo }) => {
-            return (
-              <Account
-                key={id}
-                number={accountNumber}
-                title={accountType}
-                balance={accountBalance}
-                description={accountInfo}
-              />
-            );
-          }
-        )}
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <header>
+            <h1>
+              Welcome back
+              <br /> Tony Jarvis{" "}
+            </h1>
+            <Button content="Edit name" />
+          </header>
+          <div>
+            {mock.map(
+              ({
+                id,
+                accountType,
+                accountNumber,
+                accountBalance,
+                accountInfo,
+              }) => {
+                return (
+                  <Account
+                    key={id}
+                    number={accountNumber}
+                    title={accountType}
+                    balance={accountBalance}
+                    description={accountInfo}
+                  />
+                );
+              }
+            )}
+          </div>
+        </>
+      )}
     </AccountsStyled>
   );
 }
