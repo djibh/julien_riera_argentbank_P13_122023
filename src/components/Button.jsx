@@ -1,16 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../theme";
-import { useSelector } from "react-redux";
-import HamsterLoader from "./Loader";
 
 export default function Button({ content, handleClick, className }) {
-  // const { loading } = useSelector((state) => state.user);
-
   return (
     <ButtonStyled className={className} onClick={handleClick}>
       {content}
-      {/* {loading ? <HamsterLoader /> : content} */}
     </ButtonStyled>
   );
 }

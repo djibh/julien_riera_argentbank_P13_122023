@@ -15,7 +15,7 @@ export default function Input({ label, type, id, className, handleChange }) {
     setValue(event.target.value);
   };
 
-  const handleInputBlur = () => {
+  const dispatchValue = () => {
     handleChange(value);
   };
 
@@ -25,7 +25,7 @@ export default function Input({ label, type, id, className, handleChange }) {
       <input
         value={value}
         onChange={updateValue}
-        onBlur={handleInputBlur}
+        onBlur={dispatchValue}
         type={type}
         id={id}
       />

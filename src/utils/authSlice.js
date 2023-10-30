@@ -38,12 +38,8 @@ export const userLogin = createAsyncThunk(
     })
 
 const initialState = {
-    email: '',
-    password:'',
     loading: false,
-    userInfo: null,
     token,
-    success: null,
     error: null,
 }
 

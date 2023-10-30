@@ -8,11 +8,11 @@ import { useEffect } from "react";
 
 export default function Signin() {
   const navigate = useNavigate();
-  const { success } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (success) return navigate("/accounts");
-  }, [navigate, success]);
+    if (token) return navigate("/accounts");
+  }, [navigate, token]);
 
   return (
     <SigninStyled>
