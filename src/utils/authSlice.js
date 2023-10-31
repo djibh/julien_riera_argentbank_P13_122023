@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from 'axios'
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const apiURL = 'http://127.0.0.1:3001/api/v1'
 const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null
 export const LoadingStatus = Object.freeze({
     Idle : 'idle',
@@ -21,7 +20,7 @@ export const userLogin = createAsyncThunk(
                 }
             }
             const { data } = await axios.post(
-                `${apiURL}/user/login`,
+                `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_LOGIN_ENDPOINT}`,
                 { email, password },
                 config
             )
@@ -47,7 +46,7 @@ export const fetchUserInfos = createAsyncThunk(
                 }
             }
             const { data } = await axios.post(
-                `${apiURL}/user/profile`,
+                `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_PROFILE_ENDPOINT}`,
                 { token },
                 config
             )

@@ -35,7 +35,7 @@ export default function Navbar() {
 
         {token ? (
           <div className="sign-out__nav-item">
-            <Link to={"/accounts"} className="sign-in__nav-item">
+            <Link to={"/profile"} className="sign-in__nav-item">
               <MdAccountCircle />
               {userInfos ? userInfos.firstName : "Placeholder"}
             </Link>

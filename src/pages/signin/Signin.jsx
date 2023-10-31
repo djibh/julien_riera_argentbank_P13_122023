@@ -11,7 +11,7 @@ export default function Signin() {
   const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (token) return navigate("/accounts");
+    if (token) return navigate("/profile");
   }, [navigate, token]);
 
   return (

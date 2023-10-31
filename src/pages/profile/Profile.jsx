@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoadingStatus, fetchUserInfos } from "../../utils/authSlice";
 
-export default function Accounts() {
+export default function Profile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, token, userInfos } = useSelector((state) => state.auth);
