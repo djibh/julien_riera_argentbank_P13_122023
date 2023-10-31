@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
 import { PiSignOutBold } from "react-icons/pi";
+import { MdAccountCircle } from "react-icons/md";
 import logo from "../assets/img/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { theme } from "../theme";
@@ -26,10 +27,13 @@ export default function Navbar() {
         </Link>
 
         {token ? (
-          <Link onClick={signOut} className="sign-in__nav-item">
-            <PiSignOutBold />
-            Sign out
-          </Link>
+          <div className="sign-out__nav-item">
+            <MdAccountCircle />
+            <Link onClick={signOut} className="sign-in__nav-item">
+              <PiSignOutBold />
+              Sign out
+            </Link>
+          </div>
         ) : (
           <Link to="/signin" className="sign-in__nav-item">
             <FaUserCircle />
@@ -64,7 +68,8 @@ const NavbarStyled = styled.header`
       }
     }
 
-    & .sign-in__nav-item {
+    & .sign-in__nav-item,
+    .sign-out__nav-item {
       display: flex;
       align-items: center;
       gap: ${theme.spacing.xs};

@@ -42,7 +42,7 @@ export default function Accounts() {
 
   useEffect(() => {
     if (!token) {
-      navigate("/signin");
+      return navigate("/signin");
     }
   }, [token, navigate]);
 
