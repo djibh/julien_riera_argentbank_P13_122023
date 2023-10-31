@@ -3,11 +3,26 @@ import { theme } from "../../theme";
 import Button from "../../components/Button";
 import Account from "./Account";
 import Loader from "../../components/Loader";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { LoadingStatus, fetchUserInfos } from "../../utils/authSlice";
 
 export default function Accounts() {
-  const isLoading = false;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, token, userInfos } = useSelector((state) => state.auth);
 
-  isLoading && <Loader />;
+  useEffect(() => {
+    if (!token) {
+      return navigate("/signin");
+    } else {
+      dispatch(fetchUserInfos(token));
+    }
+    // setTimeout(() => {
+    //   setisLoading(false);
+    // }, 1000);
+  }, [token, navigate, dispatch]);
 
   const mock = [
     {
@@ -35,29 +50,40 @@ export default function Accounts() {
 
   return (
     <AccountsStyled>
-      <Loader />
-      <header>
-        <h1>
-          Welcome back
-          <br /> Tony Jarvis{" "}
-        </h1>
-        <Button content="Edit name" />
-      </header>
-      <div>
-        {mock.map(
-          ({ id, accountType, accountNumber, accountBalance, accountInfo }) => {
-            return (
-              <Account
-                key={id}
-                number={accountNumber}
-                title={accountType}
-                balance={accountBalance}
-                description={accountInfo}
-              />
-            );
-          }
-        )}
-      </div>
+      {loading === LoadingStatus.Pending ? (
+        <Loader />
+      ) : (
+        <>
+          <header>
+            <h1>
+              Welcome back
+              <br /> {userInfos.firstName} {userInfos.lastName}
+            </h1>
+            <Button content="Edit name" />
+          </header>
+          <div>
+            {mock.map(
+              ({
+                id,
+                accountType,
+                accountNumber,
+                accountBalance,
+                accountInfo,
+              }) => {
+                return (
+                  <Account
+                    key={id}
+                    number={accountNumber}
+                    title={accountType}
+                    balance={accountBalance}
+                    description={accountInfo}
+                  />
+                );
+              }
+            )}
+          </div>
+        </>
+      )}
     </AccountsStyled>
   );
 }

@@ -1,12 +1,30 @@
 import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
+import { PiSignOutBold } from "react-icons/pi";
+import { MdAccountCircle } from "react-icons/md";
 import logo from "../assets/img/logo.png";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { theme } from "../theme";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserInfos, logout } from "../utils/authSlice";
+import { useEffect } from "react";
 
 export default function Navbar() {
-  const [isConnected, setIsConnected] = useState(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { token, userInfos } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!userInfos) {
+      dispatch(fetchUserInfos(token));
+    }
+  }, [dispatch, token, userInfos]);
+
+  const signOut = () => {
+    dispatch(logout());
+    navigate("/");
+    window.location.reload();
+  };
 
   return (
     <NavbarStyled>
@@ -15,7 +33,18 @@ export default function Navbar() {
           <img src={logo} alt="logo" />
         </Link>
 
-        {isConnected && (
+        {token ? (
+          <div className="sign-out__nav-item">
+            <Link to={"/accounts"} className="sign-in__nav-item">
+              <MdAccountCircle />
+              {userInfos ? userInfos.firstName : "Placeholder"}
+            </Link>
+            <Link onClick={signOut} className="sign-in__nav-item">
+              <PiSignOutBold />
+              Sign out
+            </Link>
+          </div>
+        ) : (
           <Link to="/signin" className="sign-in__nav-item">
             <FaUserCircle />
             Sign in
@@ -49,10 +78,15 @@ const NavbarStyled = styled.header`
       }
     }
 
-    & .sign-in__nav-item {
+    & .sign-in__nav-item,
+    .sign-out__nav-item {
       display: flex;
       align-items: center;
       gap: ${theme.spacing.xs};
+    }
+
+    & .sign-out__nav-item {
+      gap: 1.5em;
     }
   }
 `;
