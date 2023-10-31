@@ -6,12 +6,19 @@ import logo from "../assets/img/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { theme } from "../theme";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../utils/authSlice";
+import { fetchUserInfos, logout } from "../utils/authSlice";
+import { useEffect } from "react";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { token, userInfos } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!userInfos) {
+      dispatch(fetchUserInfos(token));
+    }
+  }, [dispatch, token, userInfos]);
 
   const signOut = () => {
     dispatch(logout());
@@ -28,7 +35,10 @@ export default function Navbar() {
 
         {token ? (
           <div className="sign-out__nav-item">
-            <MdAccountCircle />
+            <Link to={"/accounts"} className="sign-in__nav-item">
+              <MdAccountCircle />
+              {userInfos ? userInfos.firstName : "Placeholder"}
+            </Link>
             <Link onClick={signOut} className="sign-in__nav-item">
               <PiSignOutBold />
               Sign out
@@ -73,6 +83,10 @@ const NavbarStyled = styled.header`
       display: flex;
       align-items: center;
       gap: ${theme.spacing.xs};
+    }
+
+    & .sign-out__nav-item {
+      gap: 1.5em;
     }
   }
 `;

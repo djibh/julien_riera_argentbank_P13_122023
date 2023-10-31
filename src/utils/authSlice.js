@@ -4,7 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const apiURL = 'http://127.0.0.1:3001/api/v1'
 const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null
-const LoadingStatus = Object.freeze({
+export const LoadingStatus = Object.freeze({
     Idle : 'idle',
     Pending : 'pending',
     Success : 'fulfilled',
@@ -62,7 +62,7 @@ export const fetchUserInfos = createAsyncThunk(
     })
 
 const initialState = {
-    loading: false,
+    loading: 'idle',
     token,
     error: null,
     userInfos: null
@@ -92,9 +92,18 @@ const authSlice = createSlice({
             state.loading = LoadingStatus.Failed
             state.error = payload
         },
+        [fetchUserInfos.pending]: (state) => {
+            state.loading = LoadingStatus.Pending
+            state.error = null
+        },
         [fetchUserInfos.fulfilled]: (state, {payload}) => {
             state.userInfos = {firstName: payload.body.firstName, lastName: payload.body.lastName}
-        }
+            state.loading = LoadingStatus.Success
+        },
+        [fetchUserInfos.rejected]: (state, {payload}) => {
+            state.loading = LoadingStatus.Failed
+            state.error = payload
+        },
     }
 })
 

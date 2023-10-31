@@ -3,25 +3,25 @@ import { theme } from "../../theme";
 import Button from "../../components/Button";
 import Account from "./Account";
 import Loader from "../../components/Loader";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchUserInfos } from "../../utils/authSlice";
+import { LoadingStatus, fetchUserInfos } from "../../utils/authSlice";
 
 export default function Accounts() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { token, userInfos } = useSelector((state) => state.auth);
-  const [isLoading, setisLoading] = useState(true);
+  const { loading, token, userInfos } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (!token) {
       return navigate("/signin");
+    } else {
+      dispatch(fetchUserInfos(token));
     }
-    setTimeout(() => {
-      setisLoading(false);
-    }, 1000);
-    dispatch(fetchUserInfos(token));
+    // setTimeout(() => {
+    //   setisLoading(false);
+    // }, 1000);
   }, [token, navigate, dispatch]);
 
   const mock = [
@@ -50,7 +50,7 @@ export default function Accounts() {
 
   return (
     <AccountsStyled>
-      {isLoading ? (
+      {loading === LoadingStatus.Pending ? (
         <Loader />
       ) : (
         <>
