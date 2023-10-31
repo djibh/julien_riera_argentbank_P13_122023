@@ -1,31 +1,25 @@
 import styled from "styled-components";
 import { theme } from "../theme";
-import capitalize from "../utils/capitalize";
-import { useState } from "react";
-// import { useSelector } from "react-redux";
+// import { useState } from "react";
 
-export default function Input({ label, type, id, className, handleChange }) {
-  const [value, setValue] = useState("");
+export default function Input({
+  label,
+  type,
+  id,
+  className,
+  placeholder,
+  handleChange,
+}) {
+  // const [value, setValue] = useState("");
   // if no ID provided, use type value
   !id && (id = type);
-  // if no label provided, use type value and capitalize first letter
-  !label && (label = capitalize(type));
-
-  const updateValue = (event) => {
-    setValue(event.target.value);
-  };
-
-  const dispatchValue = () => {
-    handleChange(value);
-  };
 
   return (
     <InputStyled className={className}>
       <label htmlFor={id}>{label}</label>
       <input
-        value={value}
-        onChange={updateValue}
-        onBlur={dispatchValue}
+        placeholder={placeholder}
+        onChange={handleChange}
         type={type}
         id={id}
       />

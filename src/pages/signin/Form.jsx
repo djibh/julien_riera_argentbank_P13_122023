@@ -26,12 +26,15 @@ export default function Form({ icon, title }) {
       {title && <h1>{title}</h1>}
       <Input
         type={"email"}
-        handleChange={(email) => setEmail(email)}
+        label={"Email"}
+        handleChange={(e) => setEmail(e.target.value)}
         required
       />
       <Input
+        value={password}
         type={"password"}
-        handleChange={(password) => setPassword(password)}
+        label={"Password"}
+        handleChange={(e) => setPassword(e.target.value)}
         required
       />
       <Input

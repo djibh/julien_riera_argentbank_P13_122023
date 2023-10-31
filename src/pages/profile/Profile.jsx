@@ -3,12 +3,14 @@ import { theme } from "../../theme";
 import Button from "../../components/Button";
 import Account from "./Account";
 import Loader from "../../components/Loader";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoadingStatus, fetchUserInfos } from "../../utils/authSlice";
+import Input from "../../components/Input";
 
 export default function Profile() {
+  const [editProfile, setEditProfile] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, token, userInfos } = useSelector((state) => state.auth);
@@ -23,6 +25,10 @@ export default function Profile() {
     //   setisLoading(false);
     // }, 1000);
   }, [token, navigate, dispatch]);
+
+  const toggleUpdateProfile = () => {
+    setEditProfile(!editProfile);
+  };
 
   const mock = [
     {
@@ -59,7 +65,21 @@ export default function Profile() {
               Welcome back
               <br /> {userInfos.firstName} {userInfos.lastName}
             </h1>
-            <Button content="Edit name" />
+            <div className={!editProfile ? "hidden" : ""}>
+              <div className="profile-form">
+                <Input placeholder={userInfos.firstName} />
+                <Input placeholder={userInfos.lastName} />
+              </div>
+              <div className="profile-form">
+                <Button content={"Save"} />
+                <Button content={"Cancel"} handleClick={toggleUpdateProfile} />
+              </div>
+            </div>
+            <Button
+              className={editProfile ? "hidden" : ""}
+              content="Edit name"
+              handleClick={toggleUpdateProfile}
+            />
           </header>
           <div>
             {mock.map(
@@ -96,7 +116,6 @@ const AccountsStyled = styled.main`
 
   > :first-child {
     display: grid;
-    /* justify-content: center; */
     place-items: center;
   }
 
@@ -112,6 +131,20 @@ const AccountsStyled = styled.main`
       margin-inline-start: 0px;
       margin-inline-end: 0px;
       font-weight: bold;
+    }
+
+    .profile-form {
+      display: flex;
+      gap: 1.5em;
+      justify-content: center;
+
+      & button {
+        width: 7em;
+      }
+    }
+
+    .hidden {
+      display: none;
     }
   }
 `;
