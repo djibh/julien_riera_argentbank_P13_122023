@@ -21,9 +21,6 @@ export default function Profile() {
     } else {
       dispatch(fetchUserInfos(token));
     }
-    // setTimeout(() => {
-    //   setisLoading(false);
-    // }, 1000);
   }, [token, navigate, dispatch]);
 
   const toggleUpdateProfile = () => {
@@ -56,7 +53,7 @@ export default function Profile() {
 
   return (
     <AccountsStyled>
-      {loading === LoadingStatus.Pending ? (
+      {loading !== LoadingStatus.Success ? (
         <Loader />
       ) : (
         <>
