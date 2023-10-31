@@ -15,7 +15,6 @@ export const userLogin = createAsyncThunk(
     'auth/login',
     async ({ email, password }, { rejectWithValue }) => {
         try {
-            console.log("userLogin: ", email, password);
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
@@ -26,7 +25,7 @@ export const userLogin = createAsyncThunk(
                 { email, password },
                 config
             )
-            localStorage.setItem('userToken', data.userToken)
+
             return data
         } catch (error) {
             if (error.response && error.response.data.message) {
@@ -37,29 +36,30 @@ export const userLogin = createAsyncThunk(
         }
     })
 
-    export const fetchUserInfos = createAsyncThunk(
-        'auth/infos',
-        async (token, { rejectWithValue }) => {
-            try {
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                }
-                const { data } = await axios.post(
-                    `${apiURL}/user/profile`,
-                    token,
-                    config
-                )
-                return data
-            } catch (error) {
-                if (error.response && error.response.data.message) {
-                    return rejectWithValue(error.response.data.message)
-                } else {
-                    return rejectWithValue(error.message)
+export const fetchUserInfos = createAsyncThunk(
+    'auth/infos',
+    async (token, { rejectWithValue }) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
                 }
             }
-        })
+            const { data } = await axios.post(
+                `${apiURL}/user/profile`,
+                { token },
+                config
+            )
+            return data
+        } catch (error) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(error.message)
+            }
+        }
+    })
 
 const initialState = {
     loading: false,
@@ -87,15 +87,13 @@ const authSlice = createSlice({
         [userLogin.fulfilled]: (state, { payload}) => {
             state.loading = LoadingStatus.Success
             state.token = payload.body.token
-            console.log(payload);
         },
         [userLogin.rejected]: (state, {payload}) => {
             state.loading = LoadingStatus.Failed
             state.error = payload
         },
         [fetchUserInfos.fulfilled]: (state, {payload}) => {
-            console.log('user infos ', payload);
-            state.userInfos = payload
+            state.userInfos = {firstName: payload.body.firstName, lastName: payload.body.lastName}
         }
     }
 })

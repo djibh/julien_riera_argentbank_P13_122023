@@ -4,17 +4,25 @@ import Button from "../../components/Button";
 import Account from "./Account";
 import Loader from "../../components/Loader";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { fetchUserInfos } from "../../utils/authSlice";
 
 export default function Accounts() {
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { token, userInfos } = useSelector((state) => state.auth);
   const [isLoading, setisLoading] = useState(true);
 
-  setTimeout(() => {
-    setisLoading(false);
-  }, 1000);
+  useEffect(() => {
+    if (!token) {
+      return navigate("/signin");
+    }
+    setTimeout(() => {
+      setisLoading(false);
+    }, 1000);
+    dispatch(fetchUserInfos(token));
+  }, [token, navigate, dispatch]);
 
   const mock = [
     {
@@ -40,12 +48,6 @@ export default function Accounts() {
     },
   ];
 
-  useEffect(() => {
-    if (!token) {
-      return navigate("/signin");
-    }
-  }, [token, navigate]);
-
   return (
     <AccountsStyled>
       {isLoading ? (
@@ -55,7 +57,7 @@ export default function Accounts() {
           <header>
             <h1>
               Welcome back
-              <br /> Tony Jarvis{" "}
+              <br /> {userInfos.firstName} {userInfos.lastName}
             </h1>
             <Button content="Edit name" />
           </header>
