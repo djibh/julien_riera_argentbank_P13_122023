@@ -24,7 +24,6 @@ export const userLogin = createAsyncThunk(
                 { email, password },
                 config
             )
-
             return data
         } catch (error) {
             if (error.response && error.response.data.message) {
@@ -60,6 +59,31 @@ export const fetchUserInfos = createAsyncThunk(
         }
     })
 
+export const updateUserInfos = createAsyncThunk(
+    'auth/update',
+    async ({token, firstName, lastName }, { rejectWithValue }) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
+            }
+            const { data } = await axios.put(
+                `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_PROFILE_ENDPOINT}`,
+                { firstName, lastName },
+                config
+                )
+            return data
+        } catch (error) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(error.message)
+            }
+        }
+    })
+
 const initialState = {
     loading: 'idle',
     token,
@@ -75,7 +99,7 @@ const authSlice = createSlice({
             localStorage.removeItem('userToken')
             state.loading = false
             state.error = null
-        }
+        },
     },
     extraReducers: 
     {
@@ -89,7 +113,8 @@ const authSlice = createSlice({
         },
         [userLogin.rejected]: (state, {payload}) => {
             state.loading = LoadingStatus.Failed
-            state.error = payload
+            state.error = payload.message || "Something went wrong during user login."
+
         },
         [fetchUserInfos.pending]: (state) => {
             state.loading = LoadingStatus.Pending
@@ -101,7 +126,19 @@ const authSlice = createSlice({
         },
         [fetchUserInfos.rejected]: (state, {payload}) => {
             state.loading = LoadingStatus.Failed
-            state.error = payload
+            state.error = payload.message || "Something went wrong during user infos fetch."
+
+        },
+        [updateUserInfos.pending]: (state, { payload }) => {
+            state.loading = LoadingStatus.Pending
+            state.error = null
+        },
+        [updateUserInfos.fulfilled]: (state, { payload }) => {
+            state.loading = LoadingStatus.Success
+        },
+        [updateUserInfos.rejected]: (state, {payload}) => {
+            state.loading = LoadingStatus.Failed
+            state.error = payload.message || "Something went wrong during user infos update."
         },
     }
 })

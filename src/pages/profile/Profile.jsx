@@ -6,11 +6,17 @@ import Loader from "../../components/Loader";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { LoadingStatus, fetchUserInfos } from "../../utils/authSlice";
+import {
+  LoadingStatus,
+  fetchUserInfos,
+  updateUserInfos,
+} from "../../utils/authSlice";
 import Input from "../../components/Input";
 
 export default function Profile() {
   const [editProfile, setEditProfile] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, token, userInfos } = useSelector((state) => state.auth);
@@ -25,6 +31,10 @@ export default function Profile() {
 
   const toggleUpdateProfile = () => {
     setEditProfile(!editProfile);
+  };
+
+  const updateUserName = () => {
+    dispatch(updateUserInfos({ token, firstName, lastName }));
   };
 
   const mock = [
@@ -64,11 +74,17 @@ export default function Profile() {
             </h1>
             <div className={!editProfile ? "hidden" : ""}>
               <div className="profile-form">
-                <Input placeholder={userInfos.firstName} />
-                <Input placeholder={userInfos.lastName} />
+                <Input
+                  placeholder={userInfos.firstName}
+                  handleChange={(e) => setFirstName(e.target.value)}
+                />
+                <Input
+                  placeholder={userInfos.lastName}
+                  handleChange={(e) => setLastName(e.target.value)}
+                />
               </div>
               <div className="profile-form">
-                <Button content={"Save"} />
+                <Button content={"Save"} handleClick={updateUserName} />
                 <Button content={"Cancel"} handleClick={toggleUpdateProfile} />
               </div>
             </div>
