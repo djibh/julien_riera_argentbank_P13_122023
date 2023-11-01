@@ -114,7 +114,6 @@ const authSlice = createSlice({
         [userLogin.rejected]: (state, {payload}) => {
             state.loading = LoadingStatus.Failed
             state.error = payload.message || "Something went wrong during user login."
-
         },
         [fetchUserInfos.pending]: (state) => {
             state.loading = LoadingStatus.Pending
@@ -127,13 +126,13 @@ const authSlice = createSlice({
         [fetchUserInfos.rejected]: (state, {payload}) => {
             state.loading = LoadingStatus.Failed
             state.error = payload.message || "Something went wrong during user infos fetch."
-
         },
         [updateUserInfos.pending]: (state, { payload }) => {
             state.loading = LoadingStatus.Pending
             state.error = null
         },
         [updateUserInfos.fulfilled]: (state, { payload }) => {
+            state.userInfos = {firstName: payload.body.firstName, lastName: payload.body.lastName}
             state.loading = LoadingStatus.Success
         },
         [updateUserInfos.rejected]: (state, {payload}) => {

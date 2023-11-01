@@ -33,8 +33,9 @@ export default function Profile() {
     setEditProfile(!editProfile);
   };
 
-  const updateUserName = () => {
+  const updateUserName = async () => {
     dispatch(updateUserInfos({ token, firstName, lastName }));
+    setEditProfile(!editProfile);
   };
 
   const mock = [
