@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
-export default function Signin() {
+export default function Login() {
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
 

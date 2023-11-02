@@ -12,6 +12,7 @@ import {
   updateUserInfos,
 } from "../../utils/authSlice";
 import Input from "../../components/Input";
+import { accounts } from "../../data/accounts";
 
 export default function Profile() {
   const [editProfile, setEditProfile] = useState(false);
@@ -23,7 +24,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (!token) {
-      return navigate("/signin");
+      return navigate("/login");
     } else {
       dispatch(fetchUserInfos(token));
     }
@@ -37,30 +38,6 @@ export default function Profile() {
     dispatch(updateUserInfos({ token, firstName, lastName }));
     setEditProfile(!editProfile);
   };
-
-  const mock = [
-    {
-      id: 1,
-      accountType: "Argent Bank Checking",
-      accountNumber: "x8349",
-      accountBalance: "2082.79",
-      accountInfo: "Available Balance",
-    },
-    {
-      id: 2,
-      accountType: "Argent Bank Savings",
-      accountNumber: "x67124",
-      accountBalance: "10,928.42",
-      accountInfo: "Available Balance",
-    },
-    {
-      id: 3,
-      accountType: "Argent Bank Credit Card",
-      accountNumber: "x5201",
-      accountBalance: "184.30",
-      accountInfo: "Current Balance",
-    },
-  ];
 
   return (
     <AccountsStyled>
@@ -100,7 +77,7 @@ export default function Profile() {
             />
           </header>
           <div>
-            {mock.map(
+            {accounts.map(
               ({
                 id,
                 accountType,

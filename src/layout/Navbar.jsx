@@ -49,7 +49,7 @@ export default function Navbar() {
             </Link>
           </div>
         ) : (
-          <Link to="/signin" className="sign-in__nav-item">
+          <Link to="/login" className="sign-in__nav-item">
             <FaUserCircle />
             Sign in
           </Link>
