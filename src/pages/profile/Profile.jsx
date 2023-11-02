@@ -86,7 +86,11 @@ export default function Profile() {
               </div>
               <div className="profile-form">
                 <Button content={"Save"} handleClick={updateUserName} />
-                <Button content={"Cancel"} handleClick={toggleUpdateProfile} />
+                <Button
+                  content={"Cancel"}
+                  className={"outline"}
+                  handleClick={toggleUpdateProfile}
+                />
               </div>
             </div>
             <Button
@@ -147,6 +151,11 @@ const AccountsStyled = styled.main`
       font-weight: bold;
     }
 
+    .name-form {
+      display: flex;
+      flex-direction: column;
+    }
+
     .profile-form {
       display: flex;
       gap: 1.5em;
@@ -163,16 +172,24 @@ const AccountsStyled = styled.main`
   }
 
   @media only screen and (max-width: ${theme.responsive.sm}) {
-    .name-form {
-      width: 100%;
-    }
+    header {
+      .name-form {
+        gap: 1em;
+      }
+      .profile-form {
+        flex-direction: column;
+        gap: 0;
 
-    button {
-      width: 100%;
-    }
+        & button {
+          width: 100%;
+        }
 
-    .profile-form {
-      flex-direction: column;
+        .outline {
+          background-color: transparent;
+          color: ${theme.colors.primary};
+          border: none;
+        }
+      }
     }
   }
 `;

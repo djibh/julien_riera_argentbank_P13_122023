@@ -24,7 +24,7 @@ const HeroStyled = styled.div`
   background-position: bottom;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 35vh;
+  height: 40vh;
 
   .sr-only {
     border: 0 !important;
@@ -79,10 +79,11 @@ const HeroStyled = styled.div`
   }
 
   @media only screen and (max-width: ${theme.responsive.sm}) {
+    height: 250px;
+
     .hero-content {
       width: 100%;
-      max-width: 250px;
-      /* opacity: 0.9; */
+      max-width: 230px;
 
       & .subtitle {
         font-weight: ${theme.fonts.weight.bold};

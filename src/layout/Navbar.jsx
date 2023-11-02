@@ -61,6 +61,7 @@ export default function Navbar() {
 
 const NavbarStyled = styled.header`
   padding: 0em ${theme.spacing.xl};
+  border-bottom: 1px solid #eee;
 
   nav {
     display: flex;
@@ -68,6 +69,7 @@ const NavbarStyled = styled.header`
     align-items: center;
 
     img {
+      padding-block: 0.4em;
       max-width: 200px;
     }
 
@@ -106,7 +108,7 @@ const NavbarStyled = styled.header`
     nav {
       font-size: ${theme.fonts.size.S1};
       & img {
-        max-width: 150px;
+        max-width: 180px;
       }
     }
   }
