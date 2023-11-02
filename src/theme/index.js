@@ -6,7 +6,7 @@ const colors = {
     grey: "#ccc",
   }
 
-  const spacing = {
+const spacing = {
     xxs: "0.25rem",
     xs: "0.5em",
     sm: "0.75em",
@@ -15,7 +15,7 @@ const colors = {
     xl: "2em"
   }
   
-  const fonts = {
+const fonts = {
     size: {
       XXS: "0.6rem",
       XS: "0.75rem",
@@ -37,22 +37,28 @@ const colors = {
     } 
   }
   
-  const borderRadius = {
+const borderRadius = {
     subtle: "3px",
     round: "5px",
     circle: "50%",
   }
   
-  const shadows = {
+const shadows = {
     strong : "0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset",
     medium : "-8px 8px 20px 0px rgb(0 0 0 / 20%)",
     subtle : "0 -6px 8px -2px rgb(0 0 0 / 10%)"
   }
+
+const responsive = {
+    sm : "550px",
+    md : "768px"
+}
   
-  export const theme = {
+export const theme = {
     colors,
     fonts,
     borderRadius,
     shadows,
     spacing,
+    responsive
   }

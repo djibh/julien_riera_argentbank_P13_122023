@@ -73,7 +73,7 @@ export default function Profile() {
               Welcome back
               <br /> {userInfos.firstName} {userInfos.lastName}
             </h1>
-            <div className={!editProfile ? "hidden" : ""}>
+            <div className={!editProfile ? "hidden" : "name-form"}>
               <div className="profile-form">
                 <Input
                   placeholder={userInfos.firstName}
@@ -159,6 +159,20 @@ const AccountsStyled = styled.main`
 
     .hidden {
       display: none;
+    }
+  }
+
+  @media only screen and (max-width: ${theme.responsive.sm}) {
+    .name-form {
+      width: 100%;
+    }
+
+    button {
+      width: 100%;
+    }
+
+    .profile-form {
+      flex-direction: column;
     }
   }
 `;

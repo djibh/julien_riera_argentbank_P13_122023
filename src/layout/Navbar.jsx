@@ -37,11 +37,15 @@ export default function Navbar() {
           <div className="sign-out__nav-item">
             <Link to={"/profile"} className="sign-in__nav-item">
               <MdAccountCircle />
-              {userInfos ? userInfos.firstName : "Placeholder"}
+              {userInfos ? (
+                <span className="responsive-labels">{userInfos.firstName}</span>
+              ) : (
+                "Placeholder"
+              )}
             </Link>
             <Link onClick={signOut} className="sign-in__nav-item">
               <PiSignOutBold />
-              Sign out
+              <span className="responsive-labels">Sign out</span>
             </Link>
           </div>
         ) : (
@@ -87,6 +91,23 @@ const NavbarStyled = styled.header`
 
     & .sign-out__nav-item {
       gap: 1.5em;
+    }
+  }
+
+  @media only screen and (max-width: ${theme.responsive.sm}) {
+    .responsive-labels {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: ${theme.responsive.sm}) {
+    padding: 0em ${theme.spacing.md};
+
+    nav {
+      font-size: ${theme.fonts.size.S1};
+      & img {
+        max-width: 150px;
+      }
     }
   }
 `;

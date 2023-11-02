@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 export default function Account({ title, number, balance, description }) {
   // Used to display a button on Accounts page only and not Transactions page
   const location = useLocation();
-  const isCurrentPathAccounts = location.pathname === "/accounts";
+  const isCurrentPathAccounts = location.pathname === "/profile";
 
   return (
     <AccountStyled>
@@ -54,6 +54,15 @@ const AccountStyled = styled.section`
 
     &-description {
       margin: 0;
+    }
+  }
+
+  @media (max-width: ${theme.responsive.sm}) {
+    flex-direction: column;
+    text-align: center;
+
+    button {
+      margin-top: 2em;
     }
   }
 `;

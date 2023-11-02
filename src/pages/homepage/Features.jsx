@@ -19,4 +19,8 @@ const FeaturesStyled = styled.section`
   display: flex;
   justify-content: space-evenly;
   padding: ${theme.spacing.xl};
+
+  @media (max-width: ${theme.responsive.md}) {
+    flex-direction: column;
+  }
 `;

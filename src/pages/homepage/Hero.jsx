@@ -21,10 +21,10 @@ const HeroStyled = styled.div`
   align-items: center;
   position: relative;
   background-image: url("${background}");
-  background-position: 0 -300px;
+  background-position: bottom;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 400px;
+  height: 35vh;
 
   .sr-only {
     border: 0 !important;
@@ -43,7 +43,6 @@ const HeroStyled = styled.div`
   .hero-content {
     position: absolute;
     right: 5em;
-    width: 300px;
     background: ${theme.colors.white};
     padding: ${theme.spacing.xl};
     text-align: left;
@@ -57,7 +56,44 @@ const HeroStyled = styled.div`
 
     & .text {
       margin-bottom: 0;
-      font-size: ${theme.fonts.size.S1};
+      font-size: ${theme.fonts.size.S2};
+    }
+  }
+
+  @media only screen and (max-width: ${theme.responsive.md}) {
+    .hero-content {
+      position: static;
+      margin: auto;
+
+      & .subtitle {
+        font-weight: ${theme.fonts.weight.bold};
+        margin: 0;
+        font-size: ${theme.fonts.size.S3};
+      }
+
+      & .text {
+        margin-bottom: 0;
+        font-size: ${theme.fonts.size.S2};
+      }
+    }
+  }
+
+  @media only screen and (max-width: ${theme.responsive.sm}) {
+    .hero-content {
+      width: 100%;
+      max-width: 250px;
+      /* opacity: 0.9; */
+
+      & .subtitle {
+        font-weight: ${theme.fonts.weight.bold};
+        margin: 0;
+        font-size: ${theme.fonts.size.S1};
+      }
+
+      & .text {
+        margin-bottom: 0;
+        font-size: ${theme.fonts.size.S0};
+      }
     }
   }
 `;

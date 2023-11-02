@@ -127,7 +127,7 @@ const authSlice = createSlice({
             state.loading = LoadingStatus.Failed
             state.error = payload.message || "Something went wrong during user infos fetch."
         },
-        [updateUserInfos.pending]: (state, { payload }) => {
+        [updateUserInfos.pending]: (state) => {
             state.loading = LoadingStatus.Pending
             state.error = null
         },
