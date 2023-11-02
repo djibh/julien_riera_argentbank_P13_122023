@@ -21,7 +21,7 @@ const HeroStyled = styled.div`
   align-items: center;
   position: relative;
   background-image: url("${background}");
-  background-position: bottom;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   height: 40vh;
@@ -61,6 +61,8 @@ const HeroStyled = styled.div`
   }
 
   @media only screen and (max-width: ${theme.responsive.md}) {
+    background-position: bottom;
+
     .hero-content {
       position: static;
       margin: auto;
