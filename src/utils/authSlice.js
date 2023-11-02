@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from 'axios'
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null
 export const LoadingStatus = Object.freeze({
     Idle : 'idle',
     Pending : 'pending',
@@ -23,66 +22,68 @@ export const userLogin = createAsyncThunk(
                 `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_LOGIN_ENDPOINT}`,
                 { email, password },
                 config
-            )
-            return data
-        } catch (error) {
-            if (error.response && error.response.data.message) {
-                return rejectWithValue(error.response.data.message)
-            } else {
-                return rejectWithValue(error.message)
-            }
-        }
-    })
-
-export const fetchUserInfos = createAsyncThunk(
-    'auth/infos',
-    async (token, { rejectWithValue }) => {
-        try {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                }
-            }
-            const { data } = await axios.post(
-                `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_PROFILE_ENDPOINT}`,
-                { token },
-                config
-            )
-            return data
-        } catch (error) {
-            if (error.response && error.response.data.message) {
-                return rejectWithValue(error.response.data.message)
-            } else {
-                return rejectWithValue(error.message)
-            }
-        }
-    })
-
-export const updateUserInfos = createAsyncThunk(
-    'auth/update',
-    async ({token, firstName, lastName }, { rejectWithValue }) => {
-        try {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                }
-            }
-            const { data } = await axios.put(
-                `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_PROFILE_ENDPOINT}`,
-                { firstName, lastName },
-                config
                 )
-            return data
-        } catch (error) {
-            if (error.response && error.response.data.message) {
-                return rejectWithValue(error.response.data.message)
-            } else {
-                return rejectWithValue(error.message)
+                return data
+            } catch (error) {
+                if (error.response && error.response.data.message) {
+                    return rejectWithValue(error.response.data.message)
+                } else {
+                    return rejectWithValue(error.message)
+                }
             }
-        }
-    })
+        })
+        
+        export const fetchUserInfos = createAsyncThunk(
+            'auth/infos',
+            async (token, { rejectWithValue }) => {
+                try {
+                    const config = {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
+                        }
+                    }
+                    const { data } = await axios.post(
+                        `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_PROFILE_ENDPOINT}`,
+                        { token },
+                        config
+                        )
+                        return data
+                    } catch (error) {
+                        if (error.response && error.response.data.message) {
+                            return rejectWithValue(error.response.data.message)
+                        } else {
+                            return rejectWithValue(error.message)
+                        }
+                    }
+                })
+                
+                export const updateUserInfos = createAsyncThunk(
+                    'auth/update',
+                    async ({token, firstName, lastName }, { rejectWithValue }) => {
+                        try {
+                            const config = {
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${token}`,
+                                }
+                            }
+                            const { data } = await axios.put(
+                                `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_PROFILE_ENDPOINT}`,
+                                { firstName, lastName },
+                                config
+                                )
+                                return data
+                            } catch (error) {
+                                if (error.response && error.response.data.message) {
+                                    return rejectWithValue(error.response.data.message)
+                                } else {
+                                    return rejectWithValue(error.message)
+                                }
+                            }
+                        })
+                        
+const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null
 
 const initialState = {
     loading: 'idle',
@@ -107,11 +108,12 @@ const authSlice = createSlice({
             state.loading = LoadingStatus.Pending
             state.error = null
         },
-        [userLogin.fulfilled]: (state, { payload}) => {
+        [userLogin.fulfilled]: (state, { payload }) => {
             state.loading = LoadingStatus.Success
             state.token = payload.body.token
+            localStorage.setItem('userToken', state.token)
         },
-        [userLogin.rejected]: (state, {payload}) => {
+        [userLogin.rejected]: (state, {payload }) => {
             state.loading = LoadingStatus.Failed
             state.error = payload.message || "Something went wrong during user login."
         },
