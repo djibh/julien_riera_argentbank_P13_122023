@@ -30,11 +30,13 @@ export default function Profile() {
     }
   }, [token, navigate, dispatch]);
 
-  const toggleUpdateProfile = () => {
+  const toggleUpdateProfile = (event) => {
+    event.preventDefault();
     setEditProfile(!editProfile);
   };
 
-  const updateUserName = async () => {
+  const updateUserName = async (event) => {
+    event.preventDefault();
     dispatch(updateUserInfos({ token, firstName, lastName }));
     setEditProfile(!editProfile);
   };
