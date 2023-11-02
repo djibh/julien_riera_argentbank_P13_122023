@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { theme } from "../../theme";
 import Button from "../../components/Button";
 import Account from "./Account";
+import Form from "./Form";
 import Loader from "../../components/Loader";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +12,6 @@ import {
   fetchUserInfos,
   updateUserInfos,
 } from "../../utils/authSlice";
-import Input from "../../components/Input";
 import { accounts } from "../../data/accounts";
 
 export default function Profile() {
@@ -50,26 +50,14 @@ export default function Profile() {
               Welcome back
               <br /> {userInfos.firstName} {userInfos.lastName}
             </h1>
-            <div className={!editProfile ? "hidden" : "name-form"}>
-              <div className="profile-form">
-                <Input
-                  placeholder={userInfos.firstName}
-                  handleChange={(e) => setFirstName(e.target.value)}
-                />
-                <Input
-                  placeholder={userInfos.lastName}
-                  handleChange={(e) => setLastName(e.target.value)}
-                />
-              </div>
-              <div className="profile-form">
-                <Button content={"Save"} handleClick={updateUserName} />
-                <Button
-                  content={"Cancel"}
-                  className={"outline"}
-                  handleClick={toggleUpdateProfile}
-                />
-              </div>
-            </div>
+            <Form
+              editProfile={editProfile}
+              userInfos={userInfos}
+              setFirstName={setFirstName}
+              setLastName={setLastName}
+              updateUserName={updateUserName}
+              toggleUpdateProfile={toggleUpdateProfile}
+            />
             <Button
               className={editProfile ? "hidden" : ""}
               content="Edit name"
@@ -128,45 +116,8 @@ const AccountsStyled = styled.main`
       font-weight: bold;
     }
 
-    .name-form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .profile-form {
-      display: flex;
-      gap: 1.5em;
-      justify-content: center;
-
-      & button {
-        width: 7em;
-      }
-    }
-
     .hidden {
       display: none;
-    }
-  }
-
-  @media only screen and (max-width: ${theme.responsive.sm}) {
-    header {
-      .name-form {
-        gap: 1em;
-      }
-      .profile-form {
-        flex-direction: column;
-        gap: 0;
-
-        & button {
-          width: 100%;
-        }
-
-        .outline {
-          background-color: transparent;
-          color: ${theme.colors.primary};
-          border: none;
-        }
-      }
     }
   }
 `;
