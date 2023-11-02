@@ -6,29 +6,29 @@ import { theme } from "../../theme";
 export default function Form({
   editProfile,
   userInfos,
-  setFirstName,
-  setLastName,
-  updateUserName,
-  toggleUpdateProfile,
+  editFirstName,
+  editLastName,
+  saveAction,
+  cancelAction,
 }) {
   return (
     <FormStyled className={!editProfile ? "hidden" : "name-form"}>
       <div className="profile-form">
         <Input
           placeholder={userInfos.firstName}
-          handleChange={(e) => setFirstName(e.target.value)}
+          handleChange={(e) => editFirstName(e.target.value)}
         />
         <Input
           placeholder={userInfos.lastName}
-          handleChange={(e) => setLastName(e.target.value)}
+          handleChange={(e) => editLastName(e.target.value)}
         />
       </div>
       <div className="profile-form">
-        <Button content={"Save"} handleClick={updateUserName} />
+        <Button content={"Save"} handleClick={saveAction} />
         <Button
           content={"Cancel"}
           className={"outline"}
-          handleClick={toggleUpdateProfile}
+          handleClick={cancelAction}
         />
       </div>
     </FormStyled>

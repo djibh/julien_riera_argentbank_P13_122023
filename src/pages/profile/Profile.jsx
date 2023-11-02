@@ -53,10 +53,10 @@ export default function Profile() {
             <Form
               editProfile={editProfile}
               userInfos={userInfos}
-              setFirstName={setFirstName}
-              setLastName={setLastName}
-              updateUserName={updateUserName}
-              toggleUpdateProfile={toggleUpdateProfile}
+              editFirstName={setFirstName}
+              editLastName={setLastName}
+              saveAction={updateUserName}
+              cancelAction={toggleUpdateProfile}
             />
             <Button
               className={editProfile ? "hidden" : ""}
