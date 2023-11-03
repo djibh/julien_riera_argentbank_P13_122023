@@ -11,7 +11,7 @@ import {
   LoadingStatus,
   fetchUserInfos,
   updateUserInfos,
-} from "../../utils/authSlice";
+} from "../../core/redux/authSlice";
 import { accounts } from "../../data/accounts";
 
 export default function Profile() {

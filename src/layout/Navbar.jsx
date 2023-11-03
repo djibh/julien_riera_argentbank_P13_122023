@@ -6,7 +6,7 @@ import logo from "../assets/img/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { theme } from "../theme";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserInfos, logout } from "../utils/authSlice";
+import { fetchUserInfos, logout } from "../core/redux/authSlice";
 import { useEffect } from "react";
 
 export default function Navbar() {

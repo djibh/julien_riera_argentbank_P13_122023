@@ -2,7 +2,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import styled from "styled-components";
 import { theme } from "../../theme";
-import { userLogin } from "../../utils/authSlice";
+import { userLogin } from "../../core/redux/authSlice";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 

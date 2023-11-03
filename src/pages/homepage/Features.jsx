@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import FeatureItem from "./FeatureItem";
-import { features } from "../../content/features";
+import { features } from "../../assets/content/features";
 import { theme } from "../../theme";
 
 export default function Features() {
