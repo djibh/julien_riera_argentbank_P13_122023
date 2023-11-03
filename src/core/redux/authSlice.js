@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from 'axios'
 import { authService } from "../services/authService";
 
 export const LoadingStatus = Object.freeze({
@@ -10,84 +9,11 @@ export const LoadingStatus = Object.freeze({
     Failed : 'rejected'
 })
 
-export const userLogin = createAsyncThunk(
-    'auth/login',
-    authService.login()
-    // async ({ email, password }, { rejectWithValue }) => {
-    //     try {
-    //         const config = {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             }
-    //         }
-    //         const { data } = await axios.post(
-    //             `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_LOGIN_ENDPOINT}`,
-    //             { email, password },
-    //             config
-    //             )
-    //         return data
-    //     } catch (error) {
-    //             if (error.response && error.response.data.message) {
-    //                 return rejectWithValue(error.response.data.message)
-    //             } else {
-    //                 return rejectWithValue(error.message)
-    //             }
-    //         }
-    //     }
-    )
-        
-    export const fetchUserInfos = createAsyncThunk(
-        'auth/infos',
-        async (token, { rejectWithValue }) => {
-            try {
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                    }
-                }
-                const { data } = await axios.post(
-                    `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_PROFILE_ENDPOINT}`,
-                    { token },
-                    config
-                    )
-                    return data
-                } catch (error) {
-                    if (error.response && error.response.data.message) {
-                        return rejectWithValue(error.response.data.message)
-                    } else {
-                        return rejectWithValue(error.message)
-                    }
-                }
-            })
-                
-        export const updateUserInfos = createAsyncThunk(
-            'auth/update',
-            async ({token, firstName, lastName }, { rejectWithValue }) => {
-                try {
-                    const config = {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`,
-                        }
-                    }
-                    const { data } = await axios.put(
-                        `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_PROFILE_ENDPOINT}`,
-                        { firstName, lastName },
-                        config
-                        )
-                        return data
-                    } catch (error) {
-                        if (error.response && error.response.data.message) {
-                            return rejectWithValue(error.response.data.message)
-                        } else {
-                            return rejectWithValue(error.message)
-                        }
-                    }
-                })
+export const userLogin = createAsyncThunk('auth/login', authService.login())
+export const fetchUserInfos = createAsyncThunk('auth/infos', authService.fetchUserInfos())
+export const updateUserInfos = createAsyncThunk('auth/update', authService.updateUserInfos())
                         
 const token = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null
-
 const initialState = {
     loading: 'idle',
     token,
