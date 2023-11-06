@@ -33,7 +33,7 @@ export default function Navbar() {
           <img src={logo} alt="logo" />
         </Link>
 
-        {token ? (
+        {token && userInfos ? (
           <div className="sign-out__nav-item">
             <Link to={"/profile"} className="sign-in__nav-item">
               <MdAccountCircle />
